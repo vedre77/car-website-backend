@@ -51,7 +51,7 @@ public class VehiclesApiApplicationTests {
         // mandatory fields: condition, details.body, details.model, details.manufacturer
         car.setCondition(Condition.USED);
         Details details = new Details();
-        Manufacturer manufacturer = new Manufacturer("100");
+        Manufacturer manufacturer = new Manufacturer(100);
         details.setManufacturer(manufacturer);
         details.setBody("Low");
         details.setModel("A3");
