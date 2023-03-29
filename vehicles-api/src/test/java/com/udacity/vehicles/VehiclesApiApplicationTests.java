@@ -2,7 +2,10 @@ package com.udacity.vehicles;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.udacity.vehicles.domain.Condition;
 import com.udacity.vehicles.domain.car.Car;
+import com.udacity.vehicles.domain.car.Details;
+import com.udacity.vehicles.domain.manufacturer.Manufacturer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +48,18 @@ public class VehiclesApiApplicationTests {
     public void createCar() throws Exception {;
 
         Car car = new Car();
+        // mandatory fields: condition, details.body, details.model, details.manufacturer
+        car.setCondition(Condition.USED);
+        Details details = new Details();
+        Manufacturer manufacturer = new Manufacturer("100");
+        details.setManufacturer(manufacturer);
+        details.setBody("Low");
+        details.setModel("A3");
+        car.setDetails(details);
+
         URI uri = new URI("/cars");
         String carJson = toJson(car);
+        // check fields:
         System.out.println("Car JSON: " + carJson);
 
         mockMvc().perform(MockMvcRequestBuilders.post(uri)
