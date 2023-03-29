@@ -19,9 +19,9 @@ public class Manufacturer {
         this.code = code;
         this.name = name;
     }
-    // added for POST requests that pass a String code in the body:
-    public Manufacturer(String code) {
-        this.code = Integer.parseInt(code);
+    // added for POST requests that pass only the code:
+    public Manufacturer(Integer code) {
+        this.code = code;
     }
 
     public Integer getCode() {
