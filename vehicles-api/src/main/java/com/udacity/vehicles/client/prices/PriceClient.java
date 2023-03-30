@@ -32,15 +32,15 @@ public class PriceClient {
      */
     public String getPrice(Long vehicleId) {
         try {
-            Price price = client
-                    .get()
-                    .uri(uriBuilder -> uriBuilder
-                            .path("services/price/")
-                            .queryParam("vehicleId", vehicleId)
-                            .build()
-                    )
-                    .retrieve().bodyToMono(Price.class).block();
-
+            Price price = client.get()
+                                .uri(uriBuilder -> uriBuilder
+                                    .path("/prices/{id}")
+                                    .build(vehicleId)
+                                )
+                                .exchange()
+                                .block()
+                                .bodyToMono(Price.class)
+                                .block();
             return String.format("%s %s", price.getCurrency(), price.getPrice());
 
         } catch (Exception e) {
