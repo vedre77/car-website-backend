@@ -48,7 +48,7 @@ public class MapsClient {
             return location;
         } catch (Exception e) {
             log.warn("Map service is down");
-            return location;
         }
+        return null;
     }
 }
