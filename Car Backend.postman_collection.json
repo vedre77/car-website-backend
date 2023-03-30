@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "b59bc302-425c-4a01-b7b2-c0291c114e44",
+		"name": "Car Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22856775"
+	},
+	"item": [
+		{
+			"name": "VehicleAPI",
+			"item": [
+				{
+					"name": "Pricing",
+					"item": [
+						{
+							"name": "GET Price by ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8762/prices/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8762",
+									"path": [
+										"prices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET All Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Car By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\":null,\r\n\"createdAt\":null,\r\n\"modifiedAt\":null,\r\n\"condition\": 1,\r\n\"details\": {\r\n    \"body\": \"low\",\r\n    \"model\":\"A3\",\r\n    \"manufacturer\": 100,\r\n    \"numberOfDoors\":null,\r\n    \"fuelType\":null,\r\n    \"engine\":null,\r\n    \"mileage\":null,\r\n    \"modelYear\":null,\r\n    \"productionYear\":null,\r\n    \"externalColor\":null\r\n},\r\n\"location\":{\r\n    \"lat\":0.0,\r\n    \"lon\":0.0,\r\n    \"address\":null,\r\n    \"city\":null,\r\n    \"state\":null,\r\n    \"zip\":null},\r\n\"price\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cars",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Car",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\":null,\r\n\"createdAt\":null,\r\n\"modifiedAt\":null,\r\n\"condition\": 1,\r\n\"details\": {\r\n    \"body\": \"low\",\r\n    \"model\":\"A3\",\r\n    \"manufacturer\": 100,\r\n    \"numberOfDoors\":null,\r\n    \"fuelType\":null,\r\n    \"engine\":null,\r\n    \"mileage\":null,\r\n    \"modelYear\":null,\r\n    \"productionYear\":null,\r\n    \"externalColor\":null\r\n},\r\n\"location\":{\r\n    \"lat\":0.0,\r\n    \"lon\":0.0,\r\n    \"address\":null,\r\n    \"city\":null,\r\n    \"state\":null,\r\n    \"zip\":null},\r\n\"price\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/cars/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Car By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cars/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maps",
+			"item": [
+				{
+					"name": "GET Location",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9191/maps/?lat=0.0&lon=0.0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9191",
+							"path": [
+								"maps",
+								""
+							],
+							"query": [
+								{
+									"key": "lat",
+									"value": "0.0"
+								},
+								{
+									"key": "lon",
+									"value": "0.0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
