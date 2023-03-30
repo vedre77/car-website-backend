@@ -37,4 +37,13 @@ public class Price {
     public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
     }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "currency='" + currency + '\'' +
+                ", price=" + price +
+                ", vehicleId=" + vehicleId +
+                '}';
+    }
 }
