@@ -1,9 +1,20 @@
 package com.udacity.vehicles.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.udacity.vehicles.client.maps.MapsClient;
+import com.udacity.vehicles.client.prices.PriceClient;
+import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 /**
  * Implements the car service create, read, update or delete
@@ -14,15 +25,22 @@ import org.springframework.stereotype.Service;
 public class CarService {
 
     private final CarRepository repository;
+    private final MapsClient mapsClient;
+    private final PriceClient priceClient;
 
-    public CarService(CarRepository repository) {
+    public CarService(CarRepository repository, MapsClient mapsClient, PriceClient priceClient) {
         /**
          * TODO: Add the Maps and Pricing Web Clients you create
          *   in `VehiclesApiApplication` as arguments and set them here.
          */
         this.repository = repository;
+        // WebClient webClientMaps = WebClient.create("http://localhost:9191");
+        WebClient webClientMaps = WebClient.builder().baseUrl("http://localhost:9191").build();
+        WebClient webClientPrice = WebClient.builder().baseUrl("http://localhost:8762").build();
+        ModelMapper modelMapper = new ModelMapper();
+        this.mapsClient = new MapsClient(webClientMaps, modelMapper);
+        this.priceClient = new PriceClient(webClientPrice);
     }
-
     /**
      * Gathers a list of all vehicles
      * @return a list of all vehicles in the CarRepository
@@ -42,8 +60,24 @@ public class CarService {
          *   If it does not exist, throw a CarNotFoundException
          *   Remove the below code as part of your implementation.
          */
-        Car car = new Car();
 
+        Optional<Car> optionalCar = repository.findById(id);
+        Car car = optionalCar.orElseThrow(CarNotFoundException::new);
+        // make a request to the pricing microservice
+        String price = this.priceClient.getPrice(id);
+        car.setPrice(price);
+
+//        RestTemplate restTemplate = new RestTemplate();
+//        String priceUrl = "http://localhost:8762/prices/{id}";
+//        String priceResponse = restTemplate.getForObject(priceUrl, String.class, id);
+//        ObjectMapper mapper = new ObjectMapper();
+//        try {
+//            JsonNode jsonNode = mapper.readTree(priceResponse);
+//            String price = jsonNode.get("price").asText();
+//            car.setPrice(price);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         /**
          * TODO: Use the Pricing Web client you create in `VehiclesApiApplication`
          *   to get the price based on the `id` input'
@@ -51,8 +85,6 @@ public class CarService {
          * Note: The car class file uses @transient, meaning you will need to call
          *   the pricing service each time to get the price.
          */
-
-
         /**
          * TODO: Use the Maps Web client you create in `VehiclesApiApplication`
          *   to get the address for the vehicle. You should access the location
@@ -61,7 +93,9 @@ public class CarService {
          * Note: The Location class file also uses @transient for the address,
          * meaning the Maps service needs to be called each time for the address.
          */
-
+        // make a request to the maps app
+        Location mapSuppliedLocation = mapsClient.getAddress(car.getLocation());
+        car.setLocation(mapSuppliedLocation);
 
         return car;
     }
