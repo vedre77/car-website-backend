@@ -1,10 +1,10 @@
 package com.udacity.boogle.maps;
 
-import javax.annotation.processing.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Declares a class to store an address, city, state and zip code.
@@ -16,6 +16,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long addressId;
     private Long carId;
+    private Double lat;
+    private Double lon;
     private String address;
     private String city;
     private String state;
@@ -38,45 +40,56 @@ public class Address {
     public Long getCarId() {
         return carId;
     }
+    public Double getLat() {
+        return lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
 
     public String getAddress() {
         return address;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getCity() {
         return city;
     }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getState() {
         return state;
     }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getZip() {
         return zip;
     }
-
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
-
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
     }
 
     public void setCarId(Long carId) {
         this.carId = carId;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     @Override
