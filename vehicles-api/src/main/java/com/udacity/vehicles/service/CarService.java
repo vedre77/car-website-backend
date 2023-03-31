@@ -1,19 +1,14 @@
 package com.udacity.vehicles.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.udacity.vehicles.client.maps.MapsClient;
 import com.udacity.vehicles.client.prices.PriceClient;
 import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
@@ -57,7 +52,7 @@ public class CarService {
         String price = this.priceClient.getPrice(id);
         car.setPrice(price);
         // make a request to the maps app
-        Location mapSuppliedLocation = mapsClient.getAddress(car.getLocation());
+        Location mapSuppliedLocation = mapsClient.getAddress(car.getLocation(), id);
         car.setLocation(mapSuppliedLocation);
         /**
         EXAMPLE: without a client, we might use a RestTemplate:
@@ -103,19 +98,10 @@ public class CarService {
      * @param id the ID number of the car to delete
      */
     public void delete(Long id) {
-        /**
-         * TODO: Find the car by ID from the `repository` if it exists.
-         *   If it does not exist, throw a CarNotFoundException
-         */
+
         Optional<Car> optionalCar = repository.findById(id);
         Car car = optionalCar.orElseThrow(CarNotFoundException::new);
         repository.delete(car);
-
-
-        /**
-         * TODO: Delete the car from the repository.
-         */
-
 
     }
 }
