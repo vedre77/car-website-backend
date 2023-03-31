@@ -17,16 +17,17 @@ public class Price {
     private Integer id;
     private String currency;
     private BigDecimal price;
-    private Integer vehicleId;
+    private Long vehicleId;
 
     public Price() {
     }
 
-    public Price(Integer id, String currency, BigDecimal price, Integer vehicleId) {
+    public Price(String currency, BigDecimal price, Long vehicleId) {
         this.currency = currency;
         this.price = price;
         this.vehicleId = vehicleId;
     }
+
 
     public Integer getId() {
         return id;
@@ -48,7 +49,7 @@ public class Price {
         this.price = price;
     }
 
-    public Integer getVehicleId() {
+    public Long getVehicleId() {
         return vehicleId;
     }
 
@@ -56,15 +57,17 @@ public class Price {
         this.id = id;
     }
 
-    public void setVehicleId(Integer vehicleId) {
+    public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
     }
 
     @Override
     public String toString() {
         return "Price{" +
-                "currency='" + currency + '\'' +
+                "id=" + id +
+                ", currency='" + currency + '\'' +
                 ", price=" + price +
+                ", vehicleId=" + vehicleId +
                 '}';
     }
 }

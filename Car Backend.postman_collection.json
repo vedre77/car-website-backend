@@ -10,31 +10,6 @@
 			"name": "VehicleAPI",
 			"item": [
 				{
-					"name": "Pricing",
-					"item": [
-						{
-							"name": "GET Price by ID",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8762/prices/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8762",
-									"path": [
-										"prices",
-										"1"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
 					"name": "GET All Cars",
 					"request": {
 						"method": "GET",
@@ -184,6 +159,31 @@
 									"key": "carId",
 									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pricing",
+			"item": [
+				{
+					"name": "GET Price by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8762/prices/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8762",
+							"path": [
+								"prices",
+								"1"
 							]
 						}
 					},

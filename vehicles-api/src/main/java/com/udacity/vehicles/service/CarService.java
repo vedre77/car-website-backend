@@ -89,7 +89,6 @@ public class CarService {
                         return repository.save(carToBeUpdated);
                     }).orElseThrow(CarNotFoundException::new);
         }
-
         return repository.save(car);
     }
 
@@ -98,10 +97,9 @@ public class CarService {
      * @param id the ID number of the car to delete
      */
     public void delete(Long id) {
-
         Optional<Car> optionalCar = repository.findById(id);
         Car car = optionalCar.orElseThrow(CarNotFoundException::new);
         repository.delete(car);
-
+        this.priceClient.deletePrice(id);
     }
 }

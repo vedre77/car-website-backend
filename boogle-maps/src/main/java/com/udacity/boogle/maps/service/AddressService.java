@@ -27,14 +27,14 @@ public class AddressService {
                 addressRepository.delete(savedCarAddress);
             }
         }
-        Address newCarAddress = new Address();
+        Address newCarAddress = new Address(randomAddress.getAddress(),
+                randomAddress.getCity(),
+                randomAddress.getState(),
+                randomAddress.getZip()
+        );
         newCarAddress.setCarId(id);
         newCarAddress.setLat(lat);
         newCarAddress.setLon(lon);
-        newCarAddress.setAddress(randomAddress.getAddress());
-        newCarAddress.setCity(randomAddress.getCity());
-        newCarAddress.setState(randomAddress.getState());
-        newCarAddress.setZip(randomAddress.getZip());
         addressRepository.save(newCarAddress);
         return newCarAddress;
         }
