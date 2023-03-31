@@ -17,13 +17,7 @@ public class MapsController {
     @GetMapping
     public Address get(@RequestParam Double lat, @RequestParam Double lon, @RequestParam Long carId) {
         Address randomAddress = MockAddressRepository.getRandom();
-        return addressService.searchCarAddress(randomAddress, carId);
+        return addressService.searchCarAddress(randomAddress, carId, lat, lon);
 
     }
-    /**
-     * The Boogle Maps application does not actually store the address assigned to a given
-     * vehicle based on latitude and longitude, and instead randomly assigns a new one each
-     * time it is called. How could you update this to track which address is assigned to which
-     * vehicle? What happens if the vehicle latitude and longitude is updated in the Vehicles API?
-     */
 }
