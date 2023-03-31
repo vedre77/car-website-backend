@@ -48,4 +48,20 @@ public class PriceClient {
         }
         return "(consult price)";
     }
+
+    public String deletePrice(Long vehicleId) {
+        try {
+            client.delete()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/prices/{id}")
+                            .build(vehicleId)
+                    )
+                    .exchange()
+                    .block();
+            return "Vehicle price was deleted.";
+        } catch (Exception e) {
+            log.error("Unexpected error deleting price for vehicle {}", vehicleId, e);
+        }
+        return "(consult pricing)";
+    }
 }
