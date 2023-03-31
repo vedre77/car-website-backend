@@ -59,7 +59,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/cars/2",
+							"raw": "http://localhost:8080/cars/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -67,7 +67,7 @@
 							"port": "8080",
 							"path": [
 								"cars",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -108,7 +108,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"id\":null,\r\n\"createdAt\":null,\r\n\"modifiedAt\":null,\r\n\"condition\": 1,\r\n\"details\": {\r\n    \"body\": \"low\",\r\n    \"model\":\"A3\",\r\n    \"manufacturer\": 100,\r\n    \"numberOfDoors\":null,\r\n    \"fuelType\":null,\r\n    \"engine\":null,\r\n    \"mileage\":null,\r\n    \"modelYear\":null,\r\n    \"productionYear\":null,\r\n    \"externalColor\":null\r\n},\r\n\"location\":{\r\n    \"lat\":0.0,\r\n    \"lon\":0.0,\r\n    \"address\":null,\r\n    \"city\":null,\r\n    \"state\":null,\r\n    \"zip\":null},\r\n\"price\": null\r\n}",
+							"raw": "{\r\n\"id\":null,\r\n\"createdAt\":null,\r\n\"modifiedAt\":null,\r\n\"condition\": 1,\r\n\"details\": {\r\n    \"body\": \"low\",\r\n    \"model\":\"A3\",\r\n    \"manufacturer\": 100,\r\n    \"numberOfDoors\":null,\r\n    \"fuelType\":null,\r\n    \"engine\":null,\r\n    \"mileage\":null,\r\n    \"modelYear\":null,\r\n    \"productionYear\":null,\r\n    \"externalColor\":null\r\n},\r\n\"location\":{\r\n    \"lat\":2.0,\r\n    \"lon\":2.0,\r\n    \"address\":null,\r\n    \"city\":null,\r\n    \"state\":null,\r\n    \"zip\":null},\r\n\"price\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -161,7 +161,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:9191/maps/?lat=0.0&lon=0.0",
+							"raw": "http://localhost:9191/maps/?lat=0.0&lon=0.0&carId=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -179,6 +179,10 @@
 								{
 									"key": "lon",
 									"value": "0.0"
+								},
+								{
+									"key": "carId",
+									"value": "1"
 								}
 							]
 						}
