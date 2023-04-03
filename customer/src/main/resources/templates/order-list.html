@@ -9,18 +9,18 @@
   <title>Customer</title>
 </head>
 <body>
-  <h1>Order List</h1>
-  <div th:each="order: ${orders}">
-    <h3>Order:</h3>
-    <div th:each="items: ${orders.items}">
-      <h3>Car:</h3>
+  <div class="p-1 m-1">
+    <h1>Order List</h1>
+    <div class="mt-2">
+      <h3>Model:</h3>
       <p th:text="${item.modelName}"></p>
-      <h3>Name:</h3>
+      <h3>Price:</h3>
       <p th:text="${item.modelPrice}"></p>
-    </div>
     <div>
-      <form action="#" th:action="@{'/purchase/{item.itemId}'}" method="POST" >
-        <button type="submit" class="btn btn-secondary float-right mr-1">Purchase</button>
+    <div>
+  <!--      CONFIRM PURCHASE-->
+      <form action="#" th:action="@{'/purchase'}" method="GET" >
+        <button type="submit" class="btn btn-primary">Purchase</button>
       </form>
     </div>
   </div>
