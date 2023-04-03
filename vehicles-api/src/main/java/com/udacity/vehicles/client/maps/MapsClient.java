@@ -15,7 +15,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class MapsClient {
 
     private static final Logger log = LoggerFactory.getLogger(MapsClient.class);
-
     private final WebClient client;
     private final ModelMapper mapper;
 
