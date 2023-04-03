@@ -1,6 +1,7 @@
 package udacity.customer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +21,11 @@ public class UserController {
      * @return list of users
      */
     @GetMapping("/customers")
-    public String getAllUsers(Model model) {
-        List<User> users = userRepository.findAll();
-        model.addAttribute("customers", users);
-        return "customer-list";
+    public String getAllUsers(Authentication authentication, Model model) {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username);
+        model.addAttribute("user", user);
+        return "customer-profile";
     }
 
 }

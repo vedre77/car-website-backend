@@ -22,6 +22,7 @@ public class UserService {
     }
 
     public int createUser(User user) {
+
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);

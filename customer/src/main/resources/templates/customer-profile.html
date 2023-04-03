@@ -10,8 +10,13 @@
 </head>
 <body>
   <h1>User List</h1>
-  <div th:each="user: ${customers}">
+  <div>
+    <h3>User:</h3>
     <p th:text="${user.username}"></p>
+    <h3>Name:</h3>
+    <p th:text="${user.firstname}"></p>
+    <h3>Surname:</h3>
+    <p th:text="${user.lastname}"></p>
   </div>
 </body>
 </html>

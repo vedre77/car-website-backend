@@ -1,6 +1,7 @@
 package udacity.customer.controller;
 
 import udacity.customer.model.User;
+import udacity.customer.model.UserForm;
 import udacity.customer.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +21,15 @@ public class SignupController {
     }
 
     @GetMapping()
-    public String signupView() {
+    public String signupView(UserForm userForm, Model model) {
+        model.addAttribute("userForm", userForm);
         return "signup";
     }
 
     @PostMapping()
-    public String signupUser(@ModelAttribute User user, Model model) {
+    public String signupUser(@ModelAttribute User user, UserForm userForm, Model model) {
+
+        model.addAttribute("userForm", userForm);
         String signupError = null;
         if (!userService.isUsernameAvailable(user.getUsername())) {
             signupError = "The username already exists.";
