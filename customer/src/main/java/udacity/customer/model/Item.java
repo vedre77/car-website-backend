@@ -11,7 +11,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer itemId;
     private String modelName;
-    private BigDecimal modelPrice;
+    private String modelPrice;
 
     public Item() {
     }
@@ -23,7 +23,7 @@ public class Item {
         return modelName;
     }
 
-    public BigDecimal getModelPrice() {
+    public String getModelPrice() {
         return modelPrice;
     }
 
@@ -35,7 +35,15 @@ public class Item {
         this.modelName = modelName;
     }
 
-    public void setModelPrice(BigDecimal modelPrice) {
+    public void setModelPrice(String modelPrice) {
         this.modelPrice = modelPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "modelName='" + modelName + '\'' +
+                ", modelPrice='" + modelPrice + '\'' +
+                '}';
     }
 }
