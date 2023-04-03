@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+    <title>Customer</title>
+</head>
+<body>
+    <div class="container">
+        <h1>My Dashboard</h1>
+
+        <div class="container">
+            <div id="logoutDiv">
+                <form action="#" th:action="@{'/logout'}" method="POST" >
+                    <button id="logout-button" type="submit" class="btn btn-secondary float-right">Logout</button>
+                </form>
+            </div>
+            <div>
+                <form action="#" th:action="@{'/customers'}" method="GET" >
+                    <button type="submit" class="btn btn-secondary float-right mr-1">User List</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
