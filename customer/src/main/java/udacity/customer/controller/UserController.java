@@ -16,10 +16,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * Creates a list to store any user.
-     * @return list of users
-     */
     @GetMapping("/customers")
     public String getAllUsers(Authentication authentication, Model model) {
         String username = authentication.getName();
