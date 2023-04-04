@@ -12,6 +12,7 @@ public class Item {
     private Integer itemId;
     private String modelName;
     private String modelPrice;
+    private Integer quantity = 0;
 
     public Item() {
     }
@@ -27,6 +28,10 @@ public class Item {
         return modelPrice;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
     public void setId(Integer itemId) {
         this.itemId = itemId;
     }
@@ -39,11 +44,20 @@ public class Item {
         this.modelPrice = modelPrice;
     }
 
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "modelName='" + modelName + '\'' +
                 ", modelPrice='" + modelPrice + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 }

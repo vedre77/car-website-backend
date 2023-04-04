@@ -4,21 +4,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import udacity.customer.model.Item;
 import udacity.customer.repository.ItemRepository;
-import udacity.customer.repository.OrderRepository;
-
-import java.io.Reader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Component
 public class OrderClient {
@@ -27,6 +22,7 @@ public class OrderClient {
     private final ItemRepository itemRepository;
     private final WebClient client;
 
+    @Autowired
     public OrderClient(ItemRepository itemRepository) {
         this.client = WebClient.builder().baseUrl("http://localhost:8080").build();
         this.itemRepository = itemRepository;
@@ -46,23 +42,32 @@ public class OrderClient {
                     )
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
-                    .bodyToMono(Object.class).log();
+                    .bodyToMono(Object.class);
 
             Object obj = response.block();
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.convertValue(obj, JsonNode.class);
             JsonNode carList = rootNode.path("_embedded").path("carList");
+            List<Item> itemList = new ArrayList<>();
             for (JsonNode carNode : carList) {
                 String model = carNode.path("details").path("model").asText();
                 JsonNode priceNode = carNode.path("price");
                 String price = priceNode.isNull() ? "USD 10000.10" : String.valueOf(priceNode);
 
-                Item newItem = new Item();
-                newItem.setModelName(model);
-                newItem.setModelPrice(price);
-                itemRepository.save(newItem);
+                // Check if the item already exists in the database
+                Optional<Item> existingItem = Optional.ofNullable(itemRepository.findByModelName(model));
+
+                if (existingItem.isPresent()) {
+                    itemList.add(existingItem.get());
+                } else {
+                    Item newItem = new Item();
+                    newItem.setModelName(model);
+                    newItem.setModelPrice(price);
+                    itemRepository.save(newItem);
+                    itemList.add(newItem);
+                }
             }
-            return itemRepository.findAll();
+            return itemList;
 
         } catch (Exception e) {
             log.warn("Car service is down");
