@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>CHECKOUT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+    <title>Checkout</title>
 </head>
 <body>
-  <h1>CHECKOUT</h1>
+<h1>Your order</h1>
+<div th:each="item: ${checkoutList}">
+    <div class="p-1 m-1 border border-primary rounded w-25 d-flex flex-column">
+        <h3>Model:</h3>
+        <p th:text="${item.modelName}"></p>
+        <h3>Price:</h3>
+        <p th:text="${item.modelPrice}"></p>
+        <h3>Quantity:</h3>
+        <p th:text="${item.quantity}"></p>
+    </div>
+</div>
+<h3>TOTAL:</h3>
+<p th:text="${total}"></p>
+<!--      CHECKOUT-->
+<form action="/checkout/pay" method="POST">
+    <button type="submit" class="btn btn-success m-3">Checkout</button>
+</form>
 </body>
 </html>

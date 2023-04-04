@@ -19,7 +19,6 @@ public class ShopController {
 
     @GetMapping()
     public String getItemList(Model model) {
-        // LIST IS GETTING DOUBLED!!
         List<Item> allItems = orderService.listCars();
         model.addAttribute("items", allItems);
         return "shop";
@@ -28,7 +27,6 @@ public class ShopController {
     @PostMapping("/order/{itemId}")
     public String addItemToOrder(@PathVariable Integer itemId, Authentication authentication, Model model) {
         String username = authentication.getName();
-        System.out.println("itemId: " + itemId);
         orderService.createOrder(username, itemId);
         return "redirect:/shop";
     }
