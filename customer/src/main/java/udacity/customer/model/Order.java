@@ -48,4 +48,11 @@ public class Order {
     public List<Item> getItems() {
         return items;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "items=" + items +
+                '}';
+    }
 }

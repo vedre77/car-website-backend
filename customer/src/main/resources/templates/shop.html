@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+  <title>Customer</title>
+</head>
+<body>
+  <h1>Order List</h1>
+  <div th:each="item: ${items}">
+      <div class="p-1 m-1 border border-primary rounded w-25 d-flex flex-column">
+          <h3>Model:</h3>
+          <p th:text="${item.modelName}"></p>
+          <h3>Price:</h3>
+          <p th:text="${item.modelPrice}"></p>
+      </div>
+      <!--      CONFIRM PURCHASE-->
+      <div>
+          <form action="#" th:action="@{'shop/order/' + ${item.itemId}}" method="POST">
+              <input type="hidden" name="itemId" th:value="${item.itemId}" />
+              <button type="submit" class="btn btn-primary">Purchase</button>
+          </form>
+      </div>
+  </div>
+</body>
+</html>
