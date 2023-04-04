@@ -12,7 +12,7 @@ public class Item {
     private Integer itemId;
     private String modelName;
     private String modelPrice;
-    private Integer quantity = 0;
+    private Integer quantity = 1;
 
     public Item() {
     }

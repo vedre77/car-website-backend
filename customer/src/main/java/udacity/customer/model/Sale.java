@@ -13,7 +13,7 @@ public class Sale {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    private boolean status = false;
+    private SaleStatus saleStatus;
 
     public Sale() {
     }
@@ -26,8 +26,8 @@ public class Sale {
         return order;
     }
 
-    public boolean isStatus() {
-        return status;
+    public SaleStatus getSaleStatus() {
+        return saleStatus;
     }
 
     public void setId(Integer id) {
@@ -38,7 +38,19 @@ public class Sale {
         this.order = order;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setSaleId(Integer saleId) {
+        this.saleId = saleId;
+    }
+
+    public void setSaleStatus(SaleStatus saleStatus) {
+        this.saleStatus = saleStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "order=" + order +
+                ", saleStatus=" + saleStatus +
+                '}';
     }
 }
