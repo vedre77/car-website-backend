@@ -21,9 +21,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Item orderCar() {
-        // mock order
-        Item orderedItem = orderClient.getCar(1L);
-        return orderedItem;
+    public List<Item> orderCar() {
+
+        return orderClient.getCarsAsItems();
     }
 }
