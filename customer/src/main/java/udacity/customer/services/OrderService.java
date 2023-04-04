@@ -10,6 +10,7 @@ import udacity.customer.repository.OrderRepository;
 import udacity.customer.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,21 +45,29 @@ public class OrderService {
         Order order;
         // if order exists
         if (optionalOrder.isPresent()) {
-
             order = optionalOrder.get();
-
             // NEXT STEP: check if order has item gotten by the forwarded ID (check by modelName);
             // increase the quantity accordingly;
-
-            Item orderedItem = itemRepository.getOne(itemId);
-            System.out.println("I'm trying to order item from DB: " + orderedItem);
+            Item chosenItem = itemRepository.getOne(itemId);
+            String chosenItemModel = chosenItem.getModelName();
             // check if list of items in the order has it, if yes, increase quantity
             List<Item> orderItemList = order.getItems();
             System.out.println("Items in the order are: " + orderItemList);
-
-            if (orderItemList.contains(orderedItem)) {
-                return;
+            boolean matchIsFound = false;
+            for (Item item: orderItemList) {
+                if (Objects.equals(item.getModelName(), chosenItemModel)) {
+                    Integer currentQuantity = item.getQuantity();
+                    item.setQuantity(currentQuantity += 1);
+                    matchIsFound = true;
+                }
             }
+            if (!matchIsFound) {
+                orderItemList.add(chosenItem);
+            }
+            order.setItems(orderItemList);
+            orderRepository.save(order);
+            System.out.println("Check list is updated: " + orderRepository.findAll());
+
         } else {
             order = new Order();
             order.setUser(user);
