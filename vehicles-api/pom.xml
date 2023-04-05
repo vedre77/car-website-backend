@@ -115,9 +115,7 @@
                             <sourceRoot>${project.build.directory}/generated-sources/cxf
                             </sourceRoot>
                         </configuration>
-                        <goals>
-                            <goal>wsdl2java</goal>
-                        </goals>
+
                     </execution>
                 </executions>
             </plugin>
