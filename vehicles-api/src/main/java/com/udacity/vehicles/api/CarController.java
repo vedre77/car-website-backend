@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.service.CarService;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,10 +71,11 @@ class CarController {
      * @throws URISyntaxException if the request contains invalid fields or syntax
      */
     @PostMapping
-    ResponseEntity<Resource> createCar(@Valid @RequestBody Car car) throws URISyntaxException {
+    ResponseEntity<Resource<Car>> createCar(@Valid @RequestBody Car car) throws URISyntaxException {
         Car savedCar = carService.save(car);
         Resource<Car> resource = assembler.toResource(savedCar);
-        return ResponseEntity.ok(resource);
+        // status needs to be 201:
+        return ResponseEntity.created(new URI(resource.getId().expand().getHref())).body(resource);
     }
 
     /**
