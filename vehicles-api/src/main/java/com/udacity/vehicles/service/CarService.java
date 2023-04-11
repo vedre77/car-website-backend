@@ -37,7 +37,16 @@ public class CarService {
      * @return a list of all vehicles in the CarRepository
      */
     public List<Car> list() {
-        return repository.findAll();
+
+        List<Car> carList = repository.findAll();
+        for (Car car: carList) {
+            String price = this.priceClient.getPrice(car.getId());
+            car.setPrice(price);
+            Location mapSuppliedLocation = mapsClient.getAddress(car.getLocation(), car.getId());
+            car.setLocation(mapSuppliedLocation);
+        }
+
+        return carList;
     }
     /**
      * Gets car information by ID (or throws exception if non-existent)
